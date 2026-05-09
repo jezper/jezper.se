@@ -1,0 +1,49 @@
+---
+import Kicker from '@components/content/Kicker.astro';
+import Tag from '@components/content/Tag.astro';
+import { formatDate, formatIsoDate } from '@lib/formatDate';
+
+interface Props {
+  slug: string;
+  title: string;
+  date: Date;
+  description?: string;
+  tags: string[];
+  readingMinutes: number;
+}
+const { slug, title, date, description, tags, readingMinutes } = Astro.props;
+---
+<article class="card">
+  <Kicker>Essay · {date.getUTCFullYear()}</Kicker>
+  <h2 class="title"><a href={`/writing/${slug}/`}>{title}</a></h2>
+  {description && <p class="dek">{description}</p>}
+  <div class="meta">
+    <time datetime={formatIsoDate(date)}>{formatDate(date)}</time>
+    <span aria-hidden="true">·</span>
+    <span>{readingMinutes} min</span>
+    {tags.length > 0 && <>
+      <span aria-hidden="true">·</span>
+      <ul class="tags">{tags.map(t => <li><Tag name={t} /></li>)}</ul>
+    </>}
+  </div>
+</article>
+
+<style>
+  .card { padding-block: var(--space-6); border-bottom: 1px solid var(--rule); }
+  .title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-xl);
+    margin-top: var(--space-2);
+    line-height: var(--leading-snug);
+  }
+  .title a { color: var(--ink); text-decoration: none; }
+  .title a:hover { color: var(--accent); }
+  .dek { font-size: var(--text-md); color: var(--ink-muted); margin-top: var(--space-2); max-width: var(--measure-prose); }
+  .meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2);
+    font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-muted);
+    margin-top: var(--space-3);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); list-style: none; padding: 0; }
+</style>

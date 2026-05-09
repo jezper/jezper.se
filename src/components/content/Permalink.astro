@@ -1,0 +1,17 @@
+---
+interface Props { href: string; label?: string; }
+const { href, label = 'Permalink' } = Astro.props;
+---
+<a href={href} class="permalink" aria-label={label}><span aria-hidden="true">#</span></a>
+
+<style>
+  .permalink {
+    color: var(--ink-faint);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    margin-left: var(--space-2);
+    transition: color 120ms ease;
+  }
+  .permalink:hover { color: var(--accent); }
+</style>

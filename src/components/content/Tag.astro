@@ -1,0 +1,16 @@
+---
+interface Props { name: string; }
+const { name } = Astro.props;
+---
+<a href={`/tags/${name}/`} class="tag">#{name}</a>
+
+<style>
+  .tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: lowercase;
+  }
+  .tag:hover { color: var(--accent); }
+</style>

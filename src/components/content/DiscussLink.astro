@@ -1,0 +1,15 @@
+---
+interface Props { url?: string; }
+const { url } = Astro.props;
+---
+{url && (
+  <p class="discuss">
+    <a href={url}>Discuss on Mastodon →</a>
+  </p>
+)}
+
+<style>
+  .discuss { font-size: var(--text-sm); color: var(--ink-muted); margin-top: var(--space-5); }
+  .discuss a { color: var(--accent); text-decoration: none; }
+  .discuss a:hover { text-decoration: underline; }
+</style>

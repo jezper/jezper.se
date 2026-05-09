@@ -1,0 +1,16 @@
+---
+interface Props { children?: any; class?: string; }
+const { class: className = '' } = Astro.props;
+---
+<span class={`kicker ${className}`}><slot /></span>
+
+<style>
+  .kicker {
+    font-family: var(--font-ui);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    font-feature-settings: "smcp", "c2sc";
+  }
+</style>
