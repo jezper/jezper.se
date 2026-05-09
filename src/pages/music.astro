@@ -1,0 +1,48 @@
+---
+import IndexLayout from '@components/layout/IndexLayout.astro';
+import yaml from 'js-yaml';
+import releasesYaml from '../data/releases.yml?raw';
+
+interface Release { year: number; title: string; label: string; format: string; note?: string; }
+const releases = yaml.load(releasesYaml) as Release[];
+const sorted = [...releases].sort((a, b) => b.year - a.year);
+---
+<IndexLayout title="Music" intro="A previous life, producing trance under several aliases — primarily as Airbase. The full back-catalogue, mixes, and sleeve notes live at airbasemusic.com. Below: a chronological summary.">
+  <p class="meta">
+    <a href="https://airbasemusic.com">↗ Full discography at airbasemusic.com</a>
+  </p>
+  <ol class="releases">
+    {sorted.map(r => (
+      <li class="row">
+        <span class="year">{r.year}</span>
+        <span class="title">{r.title}</span>
+        <span class="label">{r.label}</span>
+        {r.note && <span class="note">{r.note}</span>}
+      </li>
+    ))}
+  </ol>
+  <p class="footnote">Selected; not exhaustive.</p>
+</IndexLayout>
+
+<style>
+  .meta { font-family: var(--font-mono); font-size: var(--text-sm); margin-top: var(--space-4); }
+  .meta a { color: var(--accent); text-decoration: none; }
+  .releases { list-style: none; padding: 0; margin-top: var(--space-6); }
+  .row {
+    display: grid;
+    grid-template-columns: 4rem 1fr auto;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .year { font-family: var(--font-mono); color: var(--ink-muted); }
+  .title { color: var(--ink); font-weight: 500; }
+  .label { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--ink-muted); }
+  .note { grid-column: 2 / -1; font-style: italic; color: var(--ink-muted); font-size: var(--text-sm); }
+  .footnote { color: var(--ink-muted); font-size: var(--text-sm); margin-top: var(--space-4); font-style: italic; }
+  @media (max-width: 600px) {
+    .row { grid-template-columns: 3rem 1fr; }
+    .label { grid-column: 1 / -1; padding-left: 0; }
+  }
+</style>
