@@ -1,0 +1,25 @@
+# .gitignore
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Obsidian (vault config stays local; do NOT track)
+.obsidian/
+
+# build artefacts and caches
+.cache/
+.tmp/
+*.log
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
