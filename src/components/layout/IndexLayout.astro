@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@components/layout/BaseLayout.astro';
+import Container from '@components/primitives/Container.astro';
+
+interface Props {
+  title: string;
+  intro?: string;
+  description?: string;
+}
+const { title, intro, description } = Astro.props;
+---
+<BaseLayout title={title} description={description ?? intro}>
+  <Container width="index">
+    <header class="head">
+      <h1 class="title display">{title}</h1>
+      {intro && <p class="intro">{intro}</p>}
+    </header>
+    <slot />
+  </Container>
+</BaseLayout>
+
+<style>
+  .head { padding-block: var(--space-7) var(--space-6); border-bottom: 1px solid var(--rule); margin-bottom: var(--space-6); }
+  .title { font-family: var(--font-display); font-weight: 800; font-size: var(--text-3xl); line-height: var(--leading-tight); }
+  .intro { color: var(--ink-muted); margin-top: var(--space-4); max-width: var(--measure-prose); }
+</style>
