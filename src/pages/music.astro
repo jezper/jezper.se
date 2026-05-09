@@ -7,7 +7,7 @@ interface Release { year: number; title: string; label: string; format: string; 
 const releases = yaml.load(releasesYaml) as Release[];
 const sorted = [...releases].sort((a, b) => b.year - a.year);
 ---
-<IndexLayout title="Music" intro="A previous life, producing trance under several aliases — primarily as Airbase. The full back-catalogue, mixes, and sleeve notes live at airbasemusic.com. Below: a chronological summary.">
+<IndexLayout title="Music" intro="Selected releases from a previous life producing trance, primarily as Airbase. Full catalogue at airbasemusic.com.">
   <p class="meta">
     <a href="https://airbasemusic.com">↗ Full discography at airbasemusic.com</a>
   </p>
