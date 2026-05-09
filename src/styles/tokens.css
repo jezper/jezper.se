@@ -10,33 +10,31 @@
 }
 @font-face {
   font-family: 'Newsreader';
-  src: url('/fonts/newsreader/Newsreader-Regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  src: url('/fonts/newsreader/Newsreader[opsz,wght].woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Newsreader';
-  src: url('/fonts/newsreader/Newsreader-Italic.woff2') format('woff2');
-  font-weight: 400; font-style: italic; font-display: swap;
-}
-@font-face {
-  font-family: 'Newsreader';
-  src: url('/fonts/newsreader/Newsreader-Medium.woff2') format('woff2');
-  font-weight: 500; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: 'Newsreader';
-  src: url('/fonts/newsreader/Newsreader-SemiBold.woff2') format('woff2');
-  font-weight: 600; font-style: normal; font-display: swap;
+  src: url('/fonts/newsreader/Newsreader-Italic[opsz,wght].woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  src: url('/fonts/jetbrains-mono/JetBrainsMono[wght].woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-Medium.woff2') format('woff2');
-  font-weight: 500; font-style: normal; font-display: swap;
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Variable.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -44,6 +42,7 @@
   --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
   --font-body:    'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-ui:      'Satoshi', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Type scale (mobile defaults; desktop overrides below) */
   --text-xs:   0.75rem;   /* 12 */
