@@ -1,0 +1,11 @@
+---
+import { getEntry } from 'astro:content';
+import ProseLayout from '@components/layout/ProseLayout.astro';
+
+const about = await getEntry('pages', 'about');
+if (!about) throw new Error('about page missing in src/content/pages/about.md');
+const { Content } = await about.render();
+---
+<ProseLayout title={about.data.title} description={about.data.description}>
+  <Content />
+</ProseLayout>
