@@ -1,9 +1,12 @@
 /* tokens.css — colors, type, spacing, breakpoints */
 
 @font-face {
-  font-family: 'Migra';
-  src: url('/fonts/migra/Migra-Extrabold.woff2') format('woff2');
-  font-weight: 800; font-style: normal; font-display: swap;
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces/Fraunces[opsz,wght].woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+  font-variation-settings: "opsz" 144;
 }
 @font-face {
   font-family: 'Newsreader';
@@ -38,7 +41,7 @@
 
 :root {
   /* Type families */
-  --font-display: 'Migra', 'Newsreader', Georgia, serif;
+  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
   --font-body:    'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
