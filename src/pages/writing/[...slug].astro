@@ -16,7 +16,7 @@ const { article } = Astro.props;
 const { Content, rawContent } = await article.render();
 const minutes = readingTime(rawContent ? rawContent() : '');
 ---
-<ProseLayout title={article.data.title} description={article.data.description}>
+<ProseLayout title={article.data.title} description={article.data.description} ogImage={article.data.ogImage}>
   <EntryHeader
     type="article"
     title={article.data.title}

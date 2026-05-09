@@ -16,7 +16,7 @@ const { note } = Astro.props;
 const { Content, rawContent } = await note.render();
 const minutes = readingTime(rawContent ? rawContent() : '');
 ---
-<ProseLayout title={note.data.title ?? `Note · ${note.data.date.toISOString().slice(0, 10)}`} description={note.data.description}>
+<ProseLayout title={note.data.title ?? `Note · ${note.data.date.toISOString().slice(0, 10)}`} description={note.data.description} ogImage={note.data.ogImage}>
   <EntryHeader
     type="note"
     title={note.data.title}

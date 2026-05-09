@@ -7,10 +7,11 @@ interface Props {
   title: string;
   description?: string;
   ogType?: 'article' | 'website';
+  ogImage?: string;
 }
-const { title, description, ogType = 'article' } = Astro.props;
+const { title, description, ogType = 'article', ogImage } = Astro.props;
 ---
-<BaseLayout title={title} description={description} ogType={ogType}>
+<BaseLayout title={title} description={description} ogType={ogType} ogImage={ogImage}>
   <Container width="content">
     <article class="prose">
       <slot />
