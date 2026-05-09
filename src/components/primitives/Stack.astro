@@ -1,0 +1,24 @@
+---
+interface Props {
+  gap?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+  as?: string;
+  class?: string;
+}
+const { gap = 4, as: Tag = 'div', class: className = '' } = Astro.props;
+---
+<Tag class={`stack stack--gap-${gap} ${className}`}>
+  <slot />
+</Tag>
+
+<style>
+  .stack { display: flex; flex-direction: column; }
+  .stack--gap-1 { gap: var(--space-1); }
+  .stack--gap-2 { gap: var(--space-2); }
+  .stack--gap-3 { gap: var(--space-3); }
+  .stack--gap-4 { gap: var(--space-4); }
+  .stack--gap-5 { gap: var(--space-5); }
+  .stack--gap-6 { gap: var(--space-6); }
+  .stack--gap-7 { gap: var(--space-7); }
+  .stack--gap-8 { gap: var(--space-8); }
+  .stack--gap-9 { gap: var(--space-9); }
+</style>
