@@ -6,7 +6,7 @@ Personal site of Jezper Lorné. Static site, no backend, Markdown-based, hosted 
 
 - Astro 4 + Markdown content collections
 - Two content types: **notes** (short) and **writing** (long-form)
-- Curatorial pages for **music**, **projects**, **elsewhere**, **about**, **now**
+- Curatorial pages for **music**, **projects**, **contact**, **about**, **now**
 - Three RSS feeds: combined, notes-only, writing-only
 - Light + dark theme, light canonical
 - Self-hosted fonts (Migra, Newsreader, JetBrains Mono)

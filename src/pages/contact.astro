@@ -1,10 +1,10 @@
 ---
 import IndexLayout from '@components/layout/IndexLayout.astro';
 import yaml from 'js-yaml';
-import elsewhereYaml from '../data/elsewhere.yml?raw';
+import contactYaml from '../data/contact.yml?raw';
 
 interface Link { kind: string; label: string; url: string; rel_me?: boolean; }
-const links = yaml.load(elsewhereYaml) as Link[];
+const links = yaml.load(contactYaml) as Link[];
 
 const groups = {
   social:  links.filter(l => l.kind === 'social'),
@@ -14,12 +14,12 @@ const groups = {
   contact: links.filter(l => l.kind === 'contact'),
   feed:    links.filter(l => l.kind === 'feed'),
 };
-const order: Array<keyof typeof groups> = ['social', 'work', 'music', 'code', 'contact', 'feed'];
+const order: Array<keyof typeof groups> = ['contact', 'social', 'work', 'music', 'code', 'feed'];
 const labels: Record<keyof typeof groups, string> = {
   social: 'Social', work: 'Work', music: 'Music', code: 'Code', contact: 'Contact', feed: 'Subscribe',
 };
 ---
-<IndexLayout title="Elsewhere" intro="Where else to find me, and how to subscribe to anything I publish here.">
+<IndexLayout title="Contact" intro="How to reach me, and where else to find me online.">
   {order.map(k => groups[k].length > 0 && (
     <section class="group">
       <h2 class="group-title">{labels[k]}</h2>

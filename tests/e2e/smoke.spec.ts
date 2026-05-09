@@ -8,7 +8,7 @@ test('homepage renders core sections', async ({ page }) => {
 });
 
 test('navigation links resolve', async ({ page }) => {
-  for (const path of ['/about/', '/now/', '/notes/', '/writing/', '/projects/', '/music/', '/elsewhere/']) {
+  for (const path of ['/about/', '/now/', '/notes/', '/writing/', '/projects/', '/music/', '/contact/']) {
     const res = await page.goto(path);
     expect(res?.status(), `Expected 200 for ${path}`).toBe(200);
   }
