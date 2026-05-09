@@ -1,0 +1,60 @@
+---
+import '@styles/global.css';
+import SiteHeader from '@components/chrome/SiteHeader.astro';
+import SiteFooter from '@components/chrome/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogType?: 'website' | 'article';
+}
+const { title, description = "Personal site of Jezper Lorné — writing, notes, music.", ogType = 'website' } = Astro.props;
+const fullTitle = title === 'Jezper Lorné' ? title : `${title} · Jezper Lorné`;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="alternate" type="application/rss+xml" title="Jezper Lorné — all" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Jezper Lorné — notes" href="/notes.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Jezper Lorné — writing" href="/writing.xml" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og-default.png', Astro.site).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Jezper Lorné" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      // Theme bootstrap — runs before paint to avoid FOUC.
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefers = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          var theme = stored || prefers;
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

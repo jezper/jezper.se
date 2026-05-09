@@ -1,0 +1,36 @@
+---
+import Container from '@components/primitives/Container.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <Container width="index">
+    <div class="row">
+      <ul class="links">
+        <li><a href="/rss.xml">RSS</a></li>
+        <li><a rel="me" href="https://mastodon.social/@jezper">Mastodon</a></li>
+        <li><a rel="me" href="https://github.com/jezper">GitHub</a></li>
+        <li><a rel="me" href="https://airbasemusic.com">airbasemusic.com</a></li>
+      </ul>
+      <p class="meta">© {year} Jezper Lorné · Made with care, not a CMS</p>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-9);
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--rule);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    font-family: var(--font-ui);
+  }
+  .row {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .links { display: flex; flex-wrap: wrap; gap: var(--space-4); list-style: none; padding: 0; }
+  .links a { color: var(--ink-muted); text-decoration: none; }
+  .links a:hover { color: var(--accent); }
+  .meta { margin: 0; }
+</style>

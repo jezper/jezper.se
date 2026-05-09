@@ -1,0 +1,53 @@
+---
+import Container from '@components/primitives/Container.astro';
+import ThemeToggle from '@components/chrome/ThemeToggle.astro';
+
+const nav = [
+  { href: '/writing/',    label: 'writing'   },
+  { href: '/notes/',      label: 'notes'     },
+  { href: '/music/',      label: 'music'     },
+  { href: '/projects/',   label: 'projects'  },
+  { href: '/about/',      label: 'about'     },
+  { href: '/elsewhere/',  label: 'elsewhere' }
+];
+const current = Astro.url.pathname;
+---
+<header class="site-header">
+  <Container width="index">
+    <div class="bar">
+      <a href="/" class="mark">Jezper Lorné</a>
+      <nav aria-label="Primary">
+        <ul class="nav">
+          {nav.map((item, i) => (
+            <li>
+              {i > 0 && <span class="dot" aria-hidden="true">·</span>}
+              <a
+                href={item.href}
+                aria-current={current.startsWith(item.href) ? 'page' : undefined}
+              >{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <ThemeToggle />
+    </div>
+  </Container>
+</header>
+
+<style>
+  .site-header { padding-block: var(--space-5); border-bottom: 1px solid var(--rule); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+  .mark {
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); font-size: var(--text-sm); font-family: var(--font-ui); }
+  .nav li { display: inline-flex; align-items: baseline; gap: var(--space-2); }
+  .nav a { color: var(--ink-muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+  .nav a[aria-current="page"] { color: var(--ink); }
+  .dot { color: var(--ink-faint); }
+</style>
