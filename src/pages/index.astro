@@ -1,9 +1,95 @@
 ---
-import BaseLayout from '@components/layout/BaseLayout.astro';
-import Container from '@components/primitives/Container.astro';
+import { getCollection, getEntry } from 'astro:content';
+import HomeLayout from '@components/layout/HomeLayout.astro';
+import NoteCard from '@components/content/NoteCard.astro';
+
+const notes    = (await getCollection('notes',   ({ data }) => !data.draft));
+const articles = (await getCollection('writing', ({ data }) => !data.draft));
+const stream = [...notes.map(n => ({ kind: 'note' as const, ...n })),
+                ...articles.map(a => ({ kind: 'article' as const, ...a }))]
+  .sort((a, b) => +b.data.date - +a.data.date)
+  .slice(0, 6);
+
+const now = await getEntry('pages', 'now');
+const nowExcerpt = now ? now.body.split('\n\n').find(p => !p.startsWith('---') && p.trim().length > 0) : '';
 ---
-<BaseLayout title="Jezper Lorné">
-  <Container>
-    <p style="margin-top: var(--space-7);">Site under construction.</p>
-  </Container>
-</BaseLayout>
+<HomeLayout description="Personal site of Jezper Lorné — Head of Product at Mecenat, formerly the trance producer Airbase.">
+  <section class="intro">
+    <h1 class="display name">Jezper Lorné</h1>
+    <p class="bio">
+      Head of Product at <a href="https://mecenat.com">Mecenat</a>. Previously, the trance
+      producer <a href="https://airbasemusic.com">Airbase</a>. Former founder, podcaster,
+      occasional cook, ongoing thinker. Lives outside Gothenburg.
+    </p>
+  </section>
+
+  {nowExcerpt && (
+    <section class="block">
+      <p class="rule"><span>Now</span></p>
+      <div class="now"><p>{nowExcerpt}</p></div>
+      <p class="more"><a href="/now/">Read full now →</a></p>
+    </section>
+  )}
+
+  <section class="block">
+    <p class="rule"><span>Latest</span></p>
+    <ol class="stream">
+      {stream.map(e => (
+        <li>
+          <NoteCard
+            slug={e.slug}
+            date={e.data.date}
+            title={e.data.title}
+            externalUrl={e.kind === 'note' ? e.data.externalUrl : undefined}
+            tags={e.data.tags}
+            type={e.kind}
+          />
+        </li>
+      ))}
+    </ol>
+    <p class="more">
+      <a href="/writing/">See all writing →</a>
+      &nbsp;&nbsp;
+      <a href="/notes/">See all notes →</a>
+    </p>
+  </section>
+
+  <section class="block">
+    <p class="rule"><span>Elsewhere</span></p>
+    <p class="elsewhere">
+      <a href="https://airbasemusic.com">airbasemusic</a> ·
+      <a rel="me" href="https://mastodon.social/@jezper">mastodon</a> ·
+      <a rel="me" href="https://github.com/jezper">github</a> ·
+      <a rel="me" href="https://www.linkedin.com/in/jezperlorne/">linkedin</a> ·
+      <a href="https://mecenat.com">mecenat</a> ·
+      <a href="/rss.xml">rss</a> ·
+      <a href="mailto:hi@jezper.se">email</a>
+    </p>
+  </section>
+</HomeLayout>
+
+<style>
+  .intro { padding-block: var(--space-7) var(--space-6); }
+  .name { font-family: var(--font-display); font-weight: 800; font-size: var(--text-4xl); line-height: var(--leading-tight); }
+  .bio { font-size: var(--text-md); color: var(--ink); margin-top: var(--space-4); max-width: var(--measure-prose); }
+
+  .block { padding-block: var(--space-6); }
+  .rule {
+    display: flex; align-items: center; gap: var(--space-3);
+    color: var(--ink-muted);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-4);
+  }
+  .rule::before, .rule::after { content: ''; flex: 1; border-top: 1px dashed var(--rule); }
+  .now p { color: var(--ink); }
+  .more { font-family: var(--font-mono); font-size: var(--text-sm); margin-top: var(--space-5); }
+  .more a { color: var(--accent); text-decoration: none; }
+  .more a:hover { text-decoration: underline; }
+  .stream { list-style: none; padding: 0; }
+  .elsewhere { color: var(--ink-muted); }
+  .elsewhere a { color: var(--ink); text-decoration: none; }
+  .elsewhere a:hover { color: var(--accent); }
+</style>
