@@ -1,0 +1,115 @@
+/* tokens.css — colors, type, spacing, breakpoints */
+
+@font-face {
+  font-family: 'Migra';
+  src: url('/fonts/migra/Migra-Extrabold.woff2') format('woff2');
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/Newsreader-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/Newsreader-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/Newsreader-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/newsreader/Newsreader-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/jetbrains-mono/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* Type families */
+  --font-display: 'Migra', 'Newsreader', Georgia, serif;
+  --font-body:    'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Type scale (mobile defaults; desktop overrides below) */
+  --text-xs:   0.75rem;   /* 12 */
+  --text-sm:   0.875rem;  /* 14 */
+  --text-base: 1.125rem;  /* 18 */
+  --text-md:   1.25rem;   /* 20 */
+  --text-lg:   1.375rem;  /* 22 */
+  --text-xl:   1.625rem;  /* 26 */
+  --text-2xl:  2rem;      /* 32 */
+  --text-3xl:  2.5rem;    /* 40 */
+  --text-4xl:  3rem;      /* 48 */
+
+  /* Leading */
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-normal: 1.5;
+  --leading-prose: 1.65;
+
+  /* Spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+  --space-12: 16rem;
+
+  /* Layout */
+  --measure-prose: 65ch;
+  --width-content: 720px;
+  --width-index:   1100px;
+
+  /* Light (canonical) */
+  --paper:        #F7F4EE;
+  --ink:          #1A1815;
+  --ink-muted:    #6E6A62;
+  --ink-faint:    #B8B3A9;
+  --rule:         #E5DFD3;
+  --surface-2:    #EFEAE0;
+  --accent:       #7A1F1F;
+  --accent-hover: #5A1414;
+  --selection:    #F0D5C8;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --paper:        #15110D;
+  --ink:          #E8E2D4;
+  --ink-muted:    #948D7E;
+  --ink-faint:    #4D483F;
+  --rule:         #2A2520;
+  --surface-2:    #1F1A14;
+  --accent:       #D86060;
+  --accent-hover: #E88080;
+  --selection:    #4A1A1A;
+
+  color-scheme: dark;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-2xl: 2.25rem;  /* 36 */
+    --text-3xl: 3.5rem;   /* 56 */
+    --text-4xl: 4.5rem;   /* 72 */
+  }
+}
