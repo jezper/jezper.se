@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import IndexLayout from '@components/layout/IndexLayout.astro';
+import ArticleCard from '@components/content/ArticleCard.astro';
+import { readingTime } from '@lib/readingTime';
+
+const articles = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => +b.data.date - +a.data.date);
+---
+<IndexLayout
+  title="Writing"
+  intro="Longer pieces. Worked-on, sometimes worked-on-again."
+>
+  <ol class="list">
+    {articles.map(a => (
+      <li>
+        <ArticleCard
+          slug={a.slug}
+          title={a.data.title}
+          date={a.data.date}
+          description={a.data.description}
+          tags={a.data.tags}
+          readingMinutes={readingTime(a.body)}
+        />
+      </li>
+    ))}
+  </ol>
+  {articles.length === 0 && <p>Nothing here yet.</p>}
+</IndexLayout>
+
+<style>
+  .list { list-style: none; padding: 0; margin: 0; }
+</style>
