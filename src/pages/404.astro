@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@components/layout/BaseLayout.astro';
+import Container from '@components/primitives/Container.astro';
+---
+<BaseLayout title="Not found" description="Page not found.">
+  <Container>
+    <div class="four">
+      <p class="kicker">404</p>
+      <h1 class="display">Not here.</h1>
+      <p>The page you tried to reach does not exist, or it once existed and was rewritten away.</p>
+      <p>
+        Go back to the <a href="/">home page</a>, browse <a href="/notes/">notes</a> or
+        <a href="/writing/">writing</a>, or subscribe via <a href="/rss.xml">RSS</a>.
+      </p>
+    </div>
+  </Container>
+</BaseLayout>
+
+<style>
+  .four { padding-block: var(--space-9); max-width: var(--measure-prose); }
+  .kicker { font-family: var(--font-mono); color: var(--ink-muted); font-size: var(--text-sm); }
+  .display { font-family: var(--font-display); font-weight: 800; font-size: var(--text-3xl); line-height: var(--leading-tight); margin-top: var(--space-3); margin-bottom: var(--space-5); }
+  p { margin-top: var(--space-3); }
+</style>
