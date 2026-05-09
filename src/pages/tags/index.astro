@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import IndexLayout from '@components/layout/IndexLayout.astro';
+
+const allEntries = [
+  ...(await getCollection('notes',   ({ data }) => !data.draft)),
+  ...(await getCollection('writing', ({ data }) => !data.draft)),
+];
+
+const counts = new Map<string, number>();
+for (const entry of allEntries) {
+  for (const t of entry.data.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+}
+const tags = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+---
+<IndexLayout title="Tags" intro="Topics that cluster across notes and writing.">
+  <ul class="cloud">
+    {tags.map(([name, count]) => (
+      <li><a href={`/tags/${name}/`}>#{name} <span class="count">{count}</span></a></li>
+    ))}
+  </ul>
+  {tags.length === 0 && <p>No tags yet.</p>}
+</IndexLayout>
+
+<style>
+  .cloud { display: flex; flex-wrap: wrap; gap: var(--space-3); list-style: none; padding: 0; }
+  .cloud a { font-family: var(--font-mono); color: var(--ink); text-decoration: none; }
+  .cloud a:hover { color: var(--accent); }
+  .count { color: var(--ink-faint); font-size: var(--text-xs); margin-left: 0.25em; }
+</style>
