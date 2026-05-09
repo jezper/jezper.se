@@ -23,3 +23,6 @@ dist/
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Claude Code (local-only settings; project-shared in settings.json)
+.claude/settings.local.json
