@@ -1,0 +1,37 @@
+---
+import IndexLayout from '@components/layout/IndexLayout.astro';
+import yaml from 'js-yaml';
+import projectsYaml from '../data/projects.yml?raw';
+
+interface Project { year: number; title: string; role: string; note: string; link?: string; }
+const projects = yaml.load(projectsYaml) as Project[];
+const sorted = [...projects].sort((a, b) => b.year - a.year);
+---
+<IndexLayout title="Projects" intro="I tend to ship things in places other than this site. A few I look back on:">
+  <ol class="projects">
+    {sorted.map(p => (
+      <li class="row">
+        <header class="head">
+          <span class="year">{p.year}</span>
+          <h2 class="title">
+            {p.link ? <a href={p.link}>{p.title} ↗</a> : p.title}
+          </h2>
+          <span class="role">{p.role}</span>
+        </header>
+        <p class="note">{p.note}</p>
+      </li>
+    ))}
+  </ol>
+</IndexLayout>
+
+<style>
+  .projects { list-style: none; padding: 0; }
+  .row { padding-block: var(--space-6); border-bottom: 1px solid var(--rule); }
+  .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-3); }
+  .year { font-family: var(--font-mono); color: var(--ink-muted); font-size: var(--text-sm); }
+  .title { font-family: var(--font-body); font-weight: 600; font-size: var(--text-lg); }
+  .title a { color: var(--ink); text-decoration: none; }
+  .title a:hover { color: var(--accent); }
+  .role { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--ink-muted); }
+  .note { color: var(--ink-muted); margin-top: var(--space-3); max-width: var(--measure-prose); }
+</style>
