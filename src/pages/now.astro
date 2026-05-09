@@ -1,0 +1,13 @@
+---
+import { getEntry } from 'astro:content';
+import ProseLayout from '@components/layout/ProseLayout.astro';
+import EditedMarker from '@components/content/EditedMarker.astro';
+
+const now = await getEntry('pages', 'now');
+if (!now) throw new Error('now page missing in src/content/pages/now.md');
+const { Content } = await now.render();
+---
+<ProseLayout title={now.data.title} description={now.data.description}>
+  <Content />
+  <EditedMarker updated={now.data.updated} />
+</ProseLayout>
