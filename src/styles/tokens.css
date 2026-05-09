@@ -1,14 +1,6 @@
 /* tokens.css — colors, type, spacing, breakpoints */
 
 @font-face {
-  font-family: 'Fraunces';
-  src: url('/fonts/fraunces/Fraunces[opsz,wght].woff2') format('woff2-variations');
-  font-weight: 300 900;
-  font-style: normal;
-  font-display: swap;
-  font-variation-settings: "opsz" 144;
-}
-@font-face {
   font-family: 'Newsreader';
   src: url('/fonts/newsreader/Newsreader[opsz,wght].woff2') format('woff2-variations');
   font-weight: 200 800;
@@ -39,7 +31,7 @@
 
 :root {
   /* Type families */
-  --font-display: 'Fraunces', 'Newsreader', Georgia, serif;
+  --font-display: 'Satoshi', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body:    'Newsreader', Georgia, 'Times New Roman', serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   --font-ui:      'Satoshi', system-ui, -apple-system, 'Segoe UI', sans-serif;
