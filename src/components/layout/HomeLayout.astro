@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@components/layout/BaseLayout.astro';
+import Container from '@components/primitives/Container.astro';
+
+interface Props {
+  description?: string;
+}
+const { description } = Astro.props;
+---
+<BaseLayout title="Jezper Lorné" description={description} ogType="website">
+  <Container width="content">
+    <slot />
+  </Container>
+</BaseLayout>
