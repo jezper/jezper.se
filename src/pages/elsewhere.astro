@@ -1,0 +1,41 @@
+---
+import IndexLayout from '@components/layout/IndexLayout.astro';
+import yaml from 'js-yaml';
+import elsewhereYaml from '../data/elsewhere.yml?raw';
+
+interface Link { kind: string; label: string; url: string; rel_me?: boolean; }
+const links = yaml.load(elsewhereYaml) as Link[];
+
+const groups = {
+  social:  links.filter(l => l.kind === 'social'),
+  work:    links.filter(l => l.kind === 'work'),
+  music:   links.filter(l => l.kind === 'music'),
+  code:    links.filter(l => l.kind === 'code'),
+  contact: links.filter(l => l.kind === 'contact'),
+  feed:    links.filter(l => l.kind === 'feed'),
+};
+const order: Array<keyof typeof groups> = ['social', 'work', 'music', 'code', 'contact', 'feed'];
+const labels: Record<keyof typeof groups, string> = {
+  social: 'Social', work: 'Work', music: 'Music', code: 'Code', contact: 'Contact', feed: 'Subscribe',
+};
+---
+<IndexLayout title="Elsewhere" intro="Where else to find me, and how to subscribe to anything I publish here.">
+  {order.map(k => groups[k].length > 0 && (
+    <section class="group">
+      <h2 class="group-title">{labels[k]}</h2>
+      <ul class="links">
+        {groups[k].map(l => (
+          <li><a href={l.url} {...(l.rel_me ? { rel: 'me' } : {})}>{l.label}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</IndexLayout>
+
+<style>
+  .group { padding-block: var(--space-5); border-bottom: 1px solid var(--rule); }
+  .group-title { font-family: var(--font-body); font-size: var(--text-lg); font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: var(--space-4); list-style: none; padding: 0; margin-top: var(--space-3); }
+  .links a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--ink-faint); text-underline-offset: 3px; }
+  .links a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+</style>
