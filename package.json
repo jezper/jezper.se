@@ -1,0 +1,29 @@
+{
+  "name": "jezper-se",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps chromium"
+  },
+  "dependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/check": "^0.9.0",
+    "remark-wiki-link": "^2.0.1",
+    "typescript": "^5.6.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^22.7.0"
+  }
+}
