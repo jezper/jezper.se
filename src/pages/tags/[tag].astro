@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import IndexLayout from '@components/layout/IndexLayout.astro';
+import NoteCard from '@components/content/NoteCard.astro';
+
+export async function getStaticPaths() {
+  const all = [
+    ...(await getCollection('notes',   ({ data }) => !data.draft)).map(e => ({ ...e, kind: 'note'    as const })),
+    ...(await getCollection('writing', ({ data }) => !data.draft)).map(e => ({ ...e, kind: 'article' as const })),
+  ];
+
+  const tags = new Set<string>();
+  for (const e of all) e.data.tags.forEach(t => tags.add(t));
+
+  return [...tags].map(tag => {
+    const entries = all
+      .filter(e => e.data.tags.includes(tag))
+      .sort((a, b) => +b.data.date - +a.data.date);
+    return { params: { tag }, props: { tag, entries } };
+  });
+}
+
+interface Props { tag: string; entries: any[]; }
+const { tag, entries } = Astro.props;
+---
+<IndexLayout title={`#${tag}`} intro={`${entries.length} ${entries.length === 1 ? 'entry' : 'entries'} tagged ${tag}.`}>
+  <ol class="list">
+    {entries.map(e => {
+      const slug = e.slug;
+      const type = e.kind;
+      return (
+        <li>
+          <NoteCard
+            slug={slug}
+            date={e.data.date}
+            title={e.data.title}
+            externalUrl={type === 'note' ? e.data.externalUrl : undefined}
+            tags={e.data.tags}
+            type={type}
+          />
+        </li>
+      );
+    })}
+  </ol>
+</IndexLayout>
+
+<style>
+  .list { list-style: none; padding: 0; margin: 0; }
+</style>
