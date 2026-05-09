@@ -1,0 +1,20 @@
+@import './reset.css';
+@import './tokens.css';
+
+html { background: var(--paper); }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-prose);
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+/* Anchor defaults */
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent-hover); }
+
+/* Headings inherit color and use display font where called for */
+h1, h2, h3, h4 { font-family: var(--font-body); font-weight: 600; line-height: var(--leading-snug); }
+.display { font-family: var(--font-display); font-weight: 800; line-height: var(--leading-tight); }
