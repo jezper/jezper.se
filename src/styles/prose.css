@@ -1,0 +1,64 @@
+/* prose.css — applied via .prose wrapper on long-form content */
+
+.prose {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-prose);
+  color: var(--ink);
+  max-width: var(--measure-prose);
+}
+
+.prose > * + * { margin-top: var(--space-5); }
+.prose h2 { font-size: var(--text-xl); margin-top: var(--space-7); margin-bottom: var(--space-3); font-weight: 600; }
+.prose h3 { font-size: var(--text-lg); margin-top: var(--space-6); margin-bottom: var(--space-2); font-weight: 600; }
+.prose h4 { font-size: var(--text-base); margin-top: var(--space-5); font-weight: 600; }
+
+.prose p, .prose li { font-size: var(--text-base); }
+.prose strong { font-weight: 600; }
+.prose em { font-style: italic; }
+
+.prose ul, .prose ol { padding-left: var(--space-5); }
+.prose ul li { list-style: disc; }
+.prose ol li { list-style: decimal; }
+.prose li + li { margin-top: var(--space-2); }
+
+.prose blockquote {
+  border-left: 2px solid var(--rule);
+  padding-left: var(--space-4);
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.prose hr {
+  border: 0;
+  text-align: center;
+  margin: var(--space-7) 0;
+  color: var(--ink-faint);
+}
+.prose hr::before { content: '⁂'; font-family: var(--font-body); font-size: var(--text-md); }
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--surface-2);
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+.prose pre {
+  font-family: var(--font-mono);
+  background: var(--surface-2);
+  padding: var(--space-4);
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: var(--text-sm);
+}
+.prose pre code { background: transparent; padding: 0; }
+
+.prose img, .prose figure { margin: var(--space-6) 0; }
+.prose figcaption { font-size: var(--text-sm); color: var(--ink-muted); margin-top: var(--space-2); }
+
+.prose a { color: var(--accent); text-decoration: underline; }
+
+/* Footnotes (remark-gfm output) */
+.prose .footnotes { margin-top: var(--space-8); border-top: 1px solid var(--rule); padding-top: var(--space-5); font-size: var(--text-sm); }
+.prose .footnotes ol { padding-left: var(--space-5); }
