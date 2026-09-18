@@ -26,3 +26,6 @@ playwright/.cache/
 
 # Claude Code (local-only settings; project-shared in settings.json)
 .claude/settings.local.json
+
+# Genväg till den delade hyllan med Mecenats repon, lokal för neo
+/_ref
